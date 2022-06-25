@@ -75,7 +75,9 @@ function getSelected() {
 
 submitBtn.addEventListener("click", () => {
   const answer = getSelected();
-
+  if (!answer) {
+    alert("please select your answer");
+  }
   var currectans = quizData[currentQuiz].correct;
   if (answer != currectans) {
     switch (answer) {
@@ -92,19 +94,22 @@ submitBtn.addEventListener("click", () => {
         d_text.style.color = "red";
     }
   }
-  switch (currectans) {
-    case "a":
-      a_text.style.color = "green";
-      break;
-    case "b":
-      b_text.style.color = "green";
-      break;
-    case "c":
-      c_text.style.color = "green";
-      break;
-    case "d":
-      d_text.style.color = "green";
+  if (answer) {
+    switch (currectans) {
+      case "a":
+        a_text.style.color = "green";
+        break;
+      case "b":
+        b_text.style.color = "green";
+        break;
+      case "c":
+        c_text.style.color = "green";
+        break;
+      case "d":
+        d_text.style.color = "green";
+    }
   }
+
   if (answer) {
     if (answer === quizData[currentQuiz].correct) {
       score++;
@@ -115,6 +120,7 @@ submitBtn.addEventListener("click", () => {
     if (currentQuiz < quizData.length) {
       setTimeout(() => {
         loadQuiz();
+
         a_text.style.color = "white";
         b_text.style.color = "white";
         c_text.style.color = "white";
